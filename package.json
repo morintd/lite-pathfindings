@@ -1,7 +1,7 @@
 {
   "name": "lite-pathfindings",
   "version": "0.0.1",
-  "description": "Project aiming to train ES6 NodeJS module publishing",
+  "description": "Simple, intuitive and lightweight pathfinding algorithms",
   "main": "./dist/lite-pathfindings.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
