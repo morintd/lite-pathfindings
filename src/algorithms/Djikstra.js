@@ -3,8 +3,8 @@ module.exports = {
     let A = EdgeMap;
 
     let S = [];
-    for(let vertex in A) {
-        S.push(vertex);
+    for(let edge in A) {
+        S.push(edge);
     }
 
     let d = [];
