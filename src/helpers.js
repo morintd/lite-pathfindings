@@ -35,5 +35,14 @@ module.exports = {
 
   getNamedPath(path, edges) {
     return path.map(edgeNumber => this.getEdgeName(edges, edgeNumber))
+  },
+
+  edgeMapContainNegativeValue(edgeMap) {
+    for(let edge in edgeMap) {
+      for(let vertex in edgeMap[edge]) {
+          return true;
+      }
+    }
+    return false;
   }
 };

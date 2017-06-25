@@ -6,7 +6,7 @@ Djikstra doesn't work with negative weight.
 ##### Floyd-Warshall
 Floyd-Warshall is an algorithm aiming to find the shortest path beetween every pair of edge, it works with ponderated graph, orented and not oriented.
 It works thanks to a matrix which represent every vertex (and weight) of a graph.
-Floyd-Warhsall works with negative weight.
+Floyd-Warhsall works with negative weight, with the exception of circuit with negative weight.
 
 ### HOW TO USE
 #### Djikstra
@@ -48,21 +48,26 @@ var litepathfindings = require('lite-pathfindings');
 var FloydWarshall = litepathfindings.FloydWarshall;
 
 // Matrix which contains edge and weight
-var matrixEdges = [ [ 0, 12, 17, 9, 27, 24, 19 ],
-  [ 12, 0, 15, 21, 21, 18, 13 ],
-  [ 17, 15, 0, 8, 10, 7, 2 ],
-  [ 9, 21, 8, 0, 18, 15, 10 ],
-  [ 27, 21, 10, 18, 0, 3, 8 ],
-  [ 24, 18, 7, 15, 3, 0, 5 ],
-  [ 19, 13, 2, 10, 8, 5, 0 ] ];
+var matrixEdges = [[0, 12, 20, 9, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY],
+[12, 0, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, 13],
+[20, Number.POSITIVE_INFINITY, 0, 8, Number.POSITIVE_INFINITY, 11, 2],
+[9, Number.POSITIVE_INFINITY, 8, 0, Number.POSITIVE_INFINITY, 21, Number.POSITIVE_INFINITY],
+[Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, 0, 3, 9],
+[Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, 11, 21, 3, 0, 5],
+[Number.POSITIVE_INFINITY, 13, 20, Number.POSITIVE_INFINITY, 9, 5, 0]];
 
-var matrix = matrixEdges.matrix;
+var matrix = matrixEdges;
 var next = FloydWarshall.init(matrix);
-var path = FloydWarshall.getPath(0, 4, next);
-var weight = FloydWarshall.getWeight(0, 4, matrix);
 
-console.log(path);
-console.log("(" + weight + ")");
+// Unless you are confident (...), you have to look for negative cycles after calling "init"
+if(!FloydWarshall.containNegativeCycle(matrix)) {
+  var path = FloydWarshall.getPath(0, 4, next);
+  var weight = FloydWarshall.getWeight(0, 4, matrix);
+  console.log(path);
+  console.log("(" + weight + ")");
+}
+else
+  console.log("This graph contains a negative cycle");
 
 ```
 Returns :
@@ -78,7 +83,7 @@ Returns :
 * getEdgeNumber(edges, edgeName) : given a list of edges and a name, return the corresponding edge number
 * getEdgeName(edges, number) : given a list of edges and a number, return the corresponding edge name
 * getNamedPath(path, edges) : given a list of number representing a path, and the correspondance beetween number and edge name, return the corresponding list of edge name
-
+* edgeMapContainNegativeValue(edgeMap) : given an edgeMap, return true if contain an edge with negative value, false otherwise
 As an example, edgeMapToMatrix and getNamedPath can be used to work with edgeMap and Floyd-Warshall :
 ```javascript
 var litepathfindings = require('lite-pathfindings');
@@ -128,6 +133,3 @@ Returns :
 
 [ 'a', 'd', 'c', 'g', 'f', 'e' ]
 ```
-
-Examples are using the following graph :
-![Image of used graph](/graph.png)

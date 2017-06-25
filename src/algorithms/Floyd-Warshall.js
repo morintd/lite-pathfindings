@@ -30,6 +30,17 @@ module.exports = {
 
   getWeight(edge1, edge2, matrix) {
     return matrix[edge1][edge2];
+  },
+
+  containNegativeCycle(matrix) {
+    let length = matrix.length;
+    for(let i = 0; i < length; i++) {
+      for(let j = 0; j < length; j++) {
+          if(matrix[i][j] < 0)
+            return true;
+      }
+    }
+    return false;
   }
 };
 
