@@ -1,7 +1,3 @@
-/*
-  L'algorithme de Djikstra permet de calculer les plus court chemins entre un sommet défini et tous les autres sommets, orienté ou non et pondéré
-*/
-
 module.exports = {
   init(EdgeMap, sDeb) {
     let A = EdgeMap;
