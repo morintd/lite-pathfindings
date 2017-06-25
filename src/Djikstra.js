@@ -3,7 +3,6 @@
 */
 
 module.exports = {
-
   init(EdgeMap, sDeb) {
     let A = EdgeMap;
 
@@ -58,5 +57,18 @@ module.exports = {
 
     A.push(sDeb)
     return A.reverse();
+  },
+
+  getWeight(path, edgeMap) {
+    var weight = 0;
+    var vertex = undefined;
+
+    path.forEach(function(v) {
+      if(vertex != undefined)
+          weight += edgeMap[vertex][v];
+      vertex = v;
+    });
+
+    return weight;
   }
 }

@@ -6,7 +6,7 @@ Projet d'implementation de l'algorithme Djikstra
 var Djikstra = require('lite-djikstra');
 
 // Structure contenant les arêtes, avec leurs poids
-var EdgeMap = {
+var edgeMap = {
   a:{b:12, c:20, d:9},
   b:{a:12, g:13},
   c:{a:20, d:8, f:11, g:2},
@@ -16,27 +16,11 @@ var EdgeMap = {
   g:{b:13, c:2, f:5, e:9}
 };
 
-let dist = [];
-let vertexMap = [];
-
-for(let vertex in EdgeMap) {
-    vertexMap.push(vertex);
-}
-
 var sDeb = "a"; // Sommet de départ
-var predecesseur = Djikstra.init(EdgeMap, sDeb);
+var predecesseur = Djikstra.init(edgeMap, sDeb);
 var path = Djikstra.getPath(predecesseur, sDeb, "e"); // On cherche le chemin le plus court jusqu'à "e"
-
+var weight = Djikstra.getWeight(path, edgeMap);
 // On calcul le poid total du chemin
-var weight = 0;
-var vertex = undefined;
-
-path.forEach(function(v) {
-  if(vertex != undefined)
-      weight += EdgeMap[vertex][v];
-
-    vertex = v;
-});
 
 console.log(path);
 console.log("(" + weight + ")");
