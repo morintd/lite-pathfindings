@@ -1,0 +1,26 @@
+{
+  "name": "lite-djikstra",
+  "version": "0.0.1",
+  "description": "Project aiming to train ES6 NodeJS module publishing",
+  "main": "djikstra.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://morintd@bitbucket.org/morintd/lite-djikstra.git"
+  },
+  "keywords": [
+    "pathfinding",
+    "djikstra",
+    "simple",
+    "lightweight"
+  ],
+  "author": "Teddy MORIN",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/morintd/lite-djikstra#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
