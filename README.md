@@ -8,8 +8,8 @@ Floyd-Warshall is an algorithm aiming to find the shortest path beetween every p
 It works thanks to a matrix which represent every vertex (and weight) of a graph.
 Floyd-Warhsall works with negative weight.
 
-#### HOW TO USE
-##### Djikstra
+### HOW TO USE
+#### Djikstra
 
 ```javascript
 var litepathfindings = require('lite-pathfindings');
@@ -27,8 +27,8 @@ var edgeMap = {
 
 var sDeb = "a"; // Start edge
 var predecessor = Djikstra.init(edgeMap, sDeb);
-var path = Djikstra.getPath(predecessor, sDeb, "e"); // We're looking for the shorter path to e
-var weight = Djikstra.getWeight(path, edgeMap); // Finding for total weight
+var path = Djikstra.getPath(predecessor, sDeb, "e"); // We're looking for the shortest path to e
+var weight = Djikstra.getWeight(path, edgeMap); // Find total weight
 
 console.log(path);
 console.log("(" + weight + ")");
@@ -41,7 +41,7 @@ Returns :
 (27)
 ```
 
-##### Floyd-Warshall
+#### Floyd-Warshall
 ###### As Floyd-Warshall use a matrix, finding weight and path is done with number
 ```javascript
 var litepathfindings = require('lite-pathfindings');
@@ -72,7 +72,7 @@ Returns :
 (27)
 ```
 
-##### Helpers
+#### Helpers
 ###### As i'd rather work with name (a, b, c, d, e, ...), an utility library is added with methods :
 * edgeMapToMatrix(edgeMap) : given an edgeMap, return the corresponding matrix, and an "edges" object which link edge name to number : {matrix, edges}.
 * getEdgeNumber(edges, edgeName) : given a list of edges and a name, return the corresponding edge number
