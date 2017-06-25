@@ -1,6 +1,6 @@
 {
   "name": "lite-pathfindings",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple, intuitive and lightweight pathfinding algorithms",
   "main": "./dist/lite-pathfindings.js",
   "scripts": {
