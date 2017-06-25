@@ -1,6 +1,6 @@
 {
   "name": "lite-pathfindings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple, intuitive and lightweight pathfinding algorithms",
   "main": "./dist/lite-pathfindings.js",
   "scripts": {
@@ -21,7 +21,7 @@
   ],
   "author": "Teddy MORIN",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/morintd/lite-djikstra#readme",
+  "homepage": "https://github.com/morintd/lite-pathfindings",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1"
