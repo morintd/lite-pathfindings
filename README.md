@@ -1,15 +1,33 @@
-# LITE-PATHFINDINGS
-### Implementation of pathfinding algorithms
+# Lite-Pathfindings
+Simple, intuitive and lightweight pathfinding algorithms
+
+### Installation
+
+```javascript
+$ npm install lite-pathfindings
+```
+
+### Features
+##### Algorithms
+Implementends algorithms are the following :
+  - Djikstra
+  - Floyd-Warshall
+  - Others soon [...] !
+
+##### Utility library
+To make it easier, handle graphs with a few extra functions :
+  - Transform a map of Edge to its Matrix representation
+  - Recover your edge names from a matrix
+  - Verify the content of an edgeMap
+
+### How to use
 ##### Djikstra
 Djikstra is a well-know algorithm aiming to find the shortest path beetween a given edge and every other edges, it works with ponderated graph, oriented and not oriented.
 Djikstra doesn't work with negative weight.
-##### Floyd-Warshall
-Floyd-Warshall is an algorithm aiming to find the shortest path beetween every pair of edge, it works with ponderated graph, orented and not oriented.
-It works thanks to a matrix which represent every vertex (and weight) of a graph.
-Floyd-Warhsall works with negative weight, with the exception of circuit with negative weight.
-
-### HOW TO USE
-#### Djikstra
+###### API :
+- init(edgeMap, sDeb) : Given an edgeMap, and an existing vertex name, create an Object "predecessor", used to get the path.
+- getPath(predecessor, sDeb, sEnd) : Given the predecessor object, the vertex name used in init, and a vertex name representing the end of the path, return the vertex list of the shortest path
+- getWeight(path, edgeMap) : given the path and the edge, return the total weight of the path
 
 ```javascript
 var litepathfindings = require('lite-pathfindings');
@@ -28,7 +46,7 @@ var edgeMap = {
 var sDeb = "a"; // Start edge
 var predecessor = Djikstra.init(edgeMap, sDeb);
 var path = Djikstra.getPath(predecessor, sDeb, "e"); // We're looking for the shortest path to e
-var weight = Djikstra.getWeight(path, edgeMap); // Find total weight
+var weight = Djikstra.getWeight(edgeMap, path); // Find total weight
 
 console.log(path);
 console.log("(" + weight + ")");
@@ -41,8 +59,16 @@ Returns :
 (27)
 ```
 
-#### Floyd-Warshall
-###### As Floyd-Warshall use a matrix, finding weight and path is done with number
+##### Floyd-Warshall
+Floyd-Warshall is an algorithm aiming to find the shortest path beetween every pair of edge, it works with ponderated graph, orented and not oriented.
+It works thanks to a matrix which represent every vertex (and weight) of a graph.
+Floyd-Warhsall works with negative weight, with the exception of circuit with negative weight.
+###### API :
+- init(matrix) : Given a matrix, return an Object "next" used to easily find paths. It also modify the given matrix by its reference.
+- getPath(next, vertex1, vertex2) : Given the "next" Object and the two vertex of a path, return the list of vertex (number as it's a matrix) that make it up.
+- getWeight(edgeMap, vertex1, vertex2) : Given an edgeMap and the two vertex of a path, return its the total weight.
+- containNegativeCycle(matrix) : Given a matrix after "init", return a boolean telling if it contains a negative cycle.
+
 ```javascript
 var litepathfindings = require('lite-pathfindings');
 var FloydWarshall = litepathfindings.FloydWarshall;
@@ -61,14 +87,13 @@ var next = FloydWarshall.init(matrix);
 
 // Unless you are confident (...), you have to look for negative cycles after calling "init"
 if(!FloydWarshall.containNegativeCycle(matrix)) {
-  var path = FloydWarshall.getPath(0, 4, next);
+  var path = FloydWarshall.getPath(next, 0, 4);
   var weight = FloydWarshall.getWeight(0, 4, matrix);
   console.log(path);
   console.log("(" + weight + ")");
 }
 else
   console.log("This graph contains a negative cycle");
-
 ```
 Returns :
 
@@ -78,13 +103,17 @@ Returns :
 ```
 
 #### Helpers
-###### As i'd rather work with name (a, b, c, d, e, ...), an utility library is added with methods :
+###### As i'd rather work with name (a, b, c, d, e, ...), an utility library is added with a few methods.
+###### API :
 * edgeMapToMatrix(edgeMap) : given an edgeMap, return the corresponding matrix, and an "edges" object which link edge name to number : {matrix, edges}.
 * getEdgeNumber(edges, edgeName) : given a list of edges and a name, return the corresponding edge number
 * getEdgeName(edges, number) : given a list of edges and a number, return the corresponding edge name
 * getNamedPath(path, edges) : given a list of number representing a path, and the correspondance beetween number and edge name, return the corresponding list of edge name
+
+But also :
 * edgeMapContainNegativeValue(edgeMap) : given an edgeMap, return true if contain an edge with negative value, false otherwise
-As an example, edgeMapToMatrix and getNamedPath can be used to work with edgeMap and Floyd-Warshall :
+
+As an example, it allows to work with edgeMap and Floyd-Warshall :
 ```javascript
 var litepathfindings = require('lite-pathfindings');
 var FloydWarshall = litepathfindings.FloydWarshall;
@@ -105,11 +134,11 @@ var matrixEdges = Helpers.edgeMapToMatrix(edgeMap);
 var matrix = matrixEdges.matrix;
 var edges = matrixEdges.edges;
 var next = FloydWarshall.init(matrix);
-var path = FloydWarshall.getPath(0, 4, next);
-var weight = FloydWarshall.getWeight(0, 4, matrix);
+var path = FloydWarshall.getPath(getEdgeNumber(edges, "a"), getEdgeNumber(edges, "e"), next);
+var weight = FloydWarshall.getWeight(getEdgeNumber(edges, "a"), getEdgeNumber(edges, "e"), matrix);
 
 console.log(matrix);
-console.log(edges);
+console.log(edges);2F
 console.log(path);
 console.log(weight);
 console.log(Helpers.getNamedPath(path, edges));
@@ -133,3 +162,5 @@ Returns :
 
 [ 'a', 'd', 'c', 'g', 'f', 'e' ]
 ```
+### License
+MIT

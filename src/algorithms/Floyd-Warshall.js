@@ -14,7 +14,7 @@ module.exports = {
       return next;
   },
 
-  getPath(u, v, next) {
+  getPath(next, u, v) {
     if(next[u][v] == undefined)
       return [];
 
@@ -28,8 +28,8 @@ module.exports = {
       return path;
   },
 
-  getWeight(edge1, edge2, matrix) {
-    return matrix[edge1][edge2];
+  getWeight(matrix, vertex1, vertex2) {
+    return matrix[vertex1][vertex2];
   },
 
   containNegativeCycle(matrix) {

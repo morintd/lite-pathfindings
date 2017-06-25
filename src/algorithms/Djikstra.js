@@ -3,8 +3,8 @@ module.exports = {
     let A = EdgeMap;
 
     let S = [];
-    for(let edge in A) {
-        S.push(edge);
+    for(let vertex in A) {
+        S.push(vertex);
     }
 
     let d = [];
@@ -41,9 +41,9 @@ module.exports = {
     return predecessor;
   },
 
-  getPath(predecessor, sDeb, sFin) {
+  getPath(predecessor, sDeb, sEnd) {
     let A = [];
-    let s = sFin;
+    let s = sEnd;
 
     while(s != sDeb)
     {
@@ -55,7 +55,7 @@ module.exports = {
     return A.reverse();
   },
 
-  getWeight(path, edgeMap) {
+  getWeight(edgeMap, path) {
     var weight = 0;
     var vertex = undefined;
 
