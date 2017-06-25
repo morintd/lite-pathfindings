@@ -20,13 +20,20 @@ var edgeMap = {
 };
 
 var sDeb = "a"; // Start edge
-var predecesseur = Djikstra.init(edgeMap, sDeb);
-var path = Djikstra.getPath(predecesseur, sDeb, "e"); // We're looking for the shorter path to e
+var predecessor = Djikstra.init(edgeMap, sDeb);
+var path = Djikstra.getPath(predecessor, sDeb, "e"); // We're looking for the shorter path to e
 var weight = Djikstra.getWeight(path, edgeMap); // Finding for total weight
 
 console.log(path);
 console.log("(" + weight + ")");
 
 ```
+Returns :
+
+```javascript
+[ 'a', 'd', 'c', 'g', 'f', 'e' ]
+(27)
+```
+
 This example is using the following graph :
 ![Image of used graph](/graph.png)

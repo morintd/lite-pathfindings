@@ -15,7 +15,7 @@ module.exports = {
     d[sDeb] = 0;
 
     let Q = S.concat();
-    let predecesseur = [];
+    let predecessor = [];
 
     while(Q.length > 0) {
       let mini = Number.POSITIVE_INFINITY;
@@ -33,22 +33,22 @@ module.exports = {
       for(let s2 in A[s1]) {
         if(d[s2] > d[s1] + A[s1][s2]) {
           d[s2] = d[s1] + A[s1][s2];
-          predecesseur[s2] = s1;
+          predecessor[s2] = s1;
         }
       }
     }
 
-    return predecesseur;
+    return predecessor;
   },
 
-  getPath(predecesseur, sDeb, sFin) {
+  getPath(predecessor, sDeb, sFin) {
     let A = [];
     let s = sFin;
 
     while(s != sDeb)
     {
       A.push(s);
-      s = predecesseur[s];
+      s = predecessor[s];
     }
 
     A.push(sDeb)
