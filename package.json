@@ -2,9 +2,11 @@
   "name": "lite-djikstra",
   "version": "0.0.1",
   "description": "Project aiming to train ES6 NodeJS module publishing",
-  "main": "djikstra.js",
+  "main": "./dist/djikstra.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --presets babel-preset-es2015 --out-dir dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
