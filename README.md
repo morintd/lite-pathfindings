@@ -9,7 +9,7 @@ $ npm install lite-pathfindings
 
 ### Features
 ##### Algorithms
-Implementeds algorithms are the following (With others soon !) :
+Implementeds algorithms are the following (with others coming soon !) :
   - Djikstra
   - Floyd-Warshall
 
